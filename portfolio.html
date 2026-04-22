@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Anand | AI Researcher</title>
+    <meta name="description" content="Personal website of Ayush Anand, AI Researcher & Engineer.">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* "Crisp Soft-Contrast" Theme - Energetic classic white, but reduces glare to prevent eye strain */
+            --bg-color: #FFFFFF;
+            --text-primary: #1F2328;
+            --text-secondary: #656D76;
+            --link-color: #0969DA;
+            --link-hover: #0349B4;
+            --border-color: #D0D7DE;
+            --card-bg: #F6F8FA;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-color);
+            line-height: 1.65;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1050px; margin: 0 auto; padding: 2rem; }
+
+        a { color: var(--link-color); text-decoration: none; transition: color 0.2s; }
+        a:hover { text-decoration: underline; color: var(--link-hover); }
+
+        /* Skimmable Top Nav */
+        .top-nav {
+            position: sticky; top: 0; background: var(--nav-bg); backdrop-filter: blur(12px);
+            padding: 15px 0; border-bottom: 1px solid var(--border-color); z-index: 100;
+        }
+        .nav-inner { max-width: 1050px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 24px; flex-wrap: wrap; font-weight: 500; }
+        .nav-inner a { color: var(--text-secondary); font-size: 0.95rem; display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .nav-inner a:hover { color: var(--text-primary); }
+
+        /* Asymmetrical Header */
+        .header-wrap { display: flex; align-items: center; justify-content: space-between; gap: 60px; margin-top: 50px; margin-bottom: 70px; }
+        .header-text { flex: 1; max-width: 650px;}
+        .header-text h1 { font-size: 3.2rem; margin: 0 0 10px 0; letter-spacing: -1.2px; line-height: 1.1; color: var(--text-primary); font-weight: 700; }
+
+        .header-img { flex-shrink: 0; width: 340px; }
+        .header-img img { width: 100%; height: auto; aspect-ratio: 1/1; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid var(--border-color); transform: rotate(1.5deg); transition: transform 0.3s;}
+        .header-img img:hover { transform: rotate(0deg); }
+
+        /* Native Icons */
+        .socials { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .socials a {
+            display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+            border-radius: 50%; background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-secondary); transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02); cursor: pointer;
+        }
+        .socials a svg, .socials a i { width: 20px; height: 20px; fill: currentColor; display: flex; align-items: center; justify-content: center; font-size: 18px;}
+        .socials a:hover { color: var(--link-color); border-color: var(--link-color); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(9, 105, 218, 0.1); }
+
+        .bio-text p { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 1.2rem; }
+
+        /* Section Headings */
+        h2 { font-size: 1.6rem; font-weight: 600; margin-top: 70px; margin-bottom: 40px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; color: var(--text-primary); }
+        h2 i { color: var(--text-secondary); font-size: 1.3rem; }
+
+        /* Timeline Redesign (Side-by-side Dates) */
+        .timeline { position: relative; max-width: 950px; margin-top: 30px; }
+        .timeline::before { content: ''; position: absolute; left: 190px; top: 0; bottom: 0; width: 2px; background: var(--border-color); }
+
+        .timeline-item { display: flex; margin-bottom: 50px; position: relative; }
+
+        /* Left Date Column */
+        .timeline-date-col { width: 175px; text-align: right; padding-right: 35px; padding-top: 4px; flex-shrink: 0; }
+        .timeline-date { color: var(--text-secondary); font-size: 0.9rem; font-family: ui-monospace, SFMono-Regular, monospace; line-height: 1.5; font-weight: 500; white-space: nowrap;}
+
+        /* Small clean icon on the axis */
+        .timeline-axis-icon {
+            position: absolute; left: 191px; top: 0px; transform: translateX(-50%);
+            width: 36px; height: 36px; border-radius: 50%; background: var(--bg-color); border: 2px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 0.95rem; z-index: 2;
+            transition: all 0.2s;
+        }
+        .timeline-item:hover .timeline-axis-icon { border-color: var(--link-color); color: var(--link-color); transform: translateX(-50%) scale(1.1); }
+
+        /* Main Timeline Content */
+        .timeline-content { flex: 1; padding-left: 45px; }
+
+        /* Logo beside Organization Name */
+        .org-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+        .org-logo { width: 32px; height: 32px; object-fit: contain; border-radius: 6px; border: 1px solid var(--border-color); background: #fff; padding: 2px; flex-shrink: 0;}
+
+        .timeline-org { font-size: 1.25rem; font-weight: 600; margin: 0; display: block; color: var(--text-primary); text-decoration: none; transition: color 0.2s;}
+        .timeline-org:hover { color: var(--link-color); }
+
+        .timeline-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; flex-wrap: wrap; }
+        .timeline-role { font-size: 1.05rem; color: var(--link-color); font-weight: 500;}
+        .timeline-loc { font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.04); padding: 3px 10px; border-radius: 12px;}
+
+        .timeline-desc { line-height: 1.6; color: var(--text-primary); margin: 0;}
+
+        /* Standard Blocks for Pubs & Research */
+        .block { margin-bottom: 45px; background: var(--card-bg); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.02);}
+        .block-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+        .block-header h3 { font-size: 1.2rem; font-weight: 600; margin: 0; line-height: 1.3; color: var(--text-primary); flex: 1; }
+        .badge { font-size: 0.8rem; background: var(--bg-color); color: var(--text-secondary); padding: 4px 10px; border-radius: 6px; font-weight: 500; border: 1px solid var(--border-color); white-space: nowrap; }
+
+        .btn-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-family: ui-monospace, SFMono-Regular, monospace; margin-bottom: 15px; margin-right: 15px; color: var(--text-primary); border: 1px solid var(--border-color); padding: 5px 12px; border-radius: 6px; background: var(--bg-color); font-weight: 600; transition: border-color 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.02);}
+        .btn-link:hover { text-decoration: none; border-color: var(--link-color); color: var(--link-color); }
+        .btn-link svg { width: 14px; height: 14px; fill: currentColor; }
+        .block p { margin: 0; line-height: 1.6; color: var(--text-primary); }
+
+        /* Pet Projects Grid */
+        .pet-projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .pet-card {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px;
+            display: flex; flex-direction: column; transition: transform 0.2s, border-color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .pet-card:hover { transform: translateY(-4px); border-color: var(--link-color); box-shadow: 0 6px 16px rgba(9, 105, 218, 0.08);}
+        .pet-card h3 { font-size: 1.15rem; margin: 0 0 10px 0; color: var(--text-primary); }
+        .pet-card p { font-size: 0.95rem; color: var(--text-primary); flex-grow: 1; margin: 0 0 15px 0;}
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;}
+        .tags span { font-size: 0.75rem; font-family: ui-monospace, SFMono-Regular, monospace; background: var(--bg-color); color: var(--text-secondary); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-color); }
+
+        footer { margin-top: 80px; padding: 30px 0; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+
+        /* Mobile Layout Adjustments */
+        @media (max-width: 850px) {
+            .header-wrap { flex-direction: column-reverse; text-align: left; gap: 30px; margin-top: 20px; }
+            .header-text { max-width: 100%; }
+            .header-img { margin: 0 auto; width: 100%; max-width: 320px; }
+            .header-img img { transform: none; }
+
+            .timeline::before { left: 20px; }
+            .timeline-item { flex-direction: column; }
+            .timeline-date-col { width: auto; text-align: left; padding: 0 0 10px 50px; }
+            .timeline-date { white-space: normal; }
+            .timeline-axis-icon { left: 21px; top: 34px; }
+            .timeline-content { padding-left: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-inner">
+            <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+            <a href="#timeline"><i class="fa-solid fa-route"></i> Timeline</a>
+            <a href="#publications"><i class="fa-solid fa-book-open"></i> Publications</a>
+            <a href="#research"><i class="fa-solid fa-microscope"></i> Research</a>
+            <a href="#projects"><i class="fa-solid fa-code"></i> Pet Projects</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header-wrap" id="about">
+            <div class="header-text">
+                <h1>Ayush Anand</h1>
+
+                <div class="socials">
+                    <a href="https://x.com/AnandAyush11" target="_blank" title="X (Twitter)">
+                        <svg viewBox="0 0 1200 1227"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/></svg>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=jbhRRFoAAAAJ&hl=en&authuser=1" target="_blank" title="Google Scholar">
+                        <svg viewBox="0 0 512 512"><path d="M390.9 298.5c0 0 0 .1 .1 .1 9.2 19.4 14.4 41.1 14.4 64 0 81.3-64 147.4-144.2 149.3-81.8 1.9-152.1-62.8-154.2-143.9-1.3-48.4 20.3-94.8 57.3-125.7v-21c-38.6 15.3-66 52.8-66 96.8 0 57.4 46.5 104 103.9 104 57.4 0 103.9-46.6 103.9-104 0-12.7-2.3-25-6.5-36.6 30.6-14.7 51.3-46 51.3-82.6 0-12.6-2.5-24.6-7-35.6l57.3-37.1v96.9c0 10.6-8.6 19.2-19.2 19.2s-19.2-8.6-19.2-19.2v-73l-16 10.4c2.5 11.2 3.8 22.8 3.8 34.6zM256 0l-256 165.8 256 165.8 217.6-140.9V348c0 10.6 8.6 19.2 19.2 19.2s19.2-8.6 19.2-19.2V176L256 0z"/></svg>
+                    </a>
+                    <a href="https://github.com/AnandAyush11" target="_blank" title="GitHub">
+                        <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ayush-anand-924ba3215/" target="_blank" title="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+
+                    <a href="#" onclick="window.location.href='mai' + 'lto:' + ['reach.anandayush', 'gmail.com'].join('@'); return false;" title="Email">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </a>
+
+                    <a href="CV_Ayush_Anand.pdf" target="_blank" title="CV">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </a>
+                </div>
+
+                <div class="bio-text">
+                    <p>
+                        Hi, I'm Ayush. I'm an AI researcher and engineer based in New Delhi. I graduated from <strong>Manipal University Jaipur</strong> with a B.Tech in Information Technology and a minor specialization in Computational Intelligence.
+                    </p>
+                    <p>
+                        My most recent work focused on fingerprint spoof detection on edge devices and geometric deep learning at IIIT Delhi. My more recent and personal area of research interests lie deeply in <strong>LLM interpretability, safety, trustworthiness, and reasoning</strong>. I enjoy looking under the hood of LLMs to understand things. Before this, I worked with large remote sensing data for crop yield prediction. I am happy to collaborate if you feel my research area seems relevant to you, and I love to help out people with my experiences from my work.
+                    </p>
+                    <p>
+                        Additionally, in my free time I enjoy weightlifting and taking long walks to clear my head.
+                    </p>
+                </div>
+            </div>
+
+            <div class="header-img">
+                <img src="square.jpg" alt="Ayush Anand">
+            </div>
+        </div>
+
+        <h2 id="timeline"><i class="fa-solid fa-clock-rotate-left"></i> Timeline</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-date-col">
+                    <div class="timeline-date">Dec 2025 - Mar 2026</div>
+                </div>
+
+                <div class="timeline-axis-icon"><i class="fa-solid fa-flask"></i></div>
+
+                <div class="timeline-content">
+                    <div class="org-header">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/IIIT-Delhi_Insignia.svg/500px-IIIT-Delhi_Insignia.svg.png" alt="IIIT-D" class="org-logo" onerror="this.style.display='none'" referrerpolicy="no-referrer">
+                        <a href="https://iiitd.ac.in/" target="_blank" class="timeline-org">Indraprastha Institute of Information Technology Delhi (IIIT-D)</a>
+                    </div>
+                    <div class="timeline-meta">
+                        <span class="timeline-role">Research Assistant (The Sengupta Lab)</span>
+                        <span class="timeline-loc"><i class="fa-solid fa-location-dot"></i> New Delhi, India</span>
+                    </div>
+                    <div class="timeline-desc">
+                        I am currently working on a tricky biometric privacy problem for an Aadhaar UIDAI partner. Storing raster images of fingerprints is a massive privacy risk, so I'm researching ways to match them mathematically using only sparse, unordered point clouds \(\{x, y, \theta\}\). I am fusing PointNet++ with Graph Neural Networks and using RANSAC to enforce rigid-body physics, ensuring the model can't hallucinate matches. Separately, I'm writing lightweight CNNs to catch fingerprint spoofing directly on edge devices.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date-col">
+                    <div class="timeline-date">Sept 2024 - Mar 2025</div>
+                </div>
+
+                <div class="timeline-axis-icon"><i class="fa-solid fa-briefcase"></i></div>
+
+                <div class="timeline-content">
+                    <div class="org-header">
+                        <img src="https://media.licdn.com/dms/image/v2/D560BAQF-jLf4vWUx9g/company-logo_200_200/company-logo_200_200/0/1699514201876/ineuron_ai_logo?e=2147483647&v=beta&t=JtlAVwYyVF7HYTP54DK1VdQD0C5czlXz8eh7bKYJ8ks" alt="iNeuron" class="org-logo" style="border-radius: 50%;" onerror="this.style.display='none'" referrerpolicy="no-referrer">
+                        <a href="https://ineuron.ai/" target="_blank" class="timeline-org">iNeuron Intelligence Pvt. Ltd.</a>
+                    </div>
+                    <div class="timeline-meta">
+                        <span class="timeline-role">Data Science Intern</span>
+                        <span class="timeline-loc"><i class="fa-solid fa-location-dot"></i> Bangalore, India</span>
+                    </div>
+                    <div class="timeline-desc">
+                        Before diving into pure research, I spent time building ML systems in the industry. I built out a prototype for financial fraud detection by mapping out transactional anomalies. It wasn't just modeling, though; I designed the Flask UI and set up full CI/CD deployment pipelines so we could ship code faster instead of leaving it stuck in Jupyter notebooks.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date-col">
+                    <div class="timeline-date">Aug 2020 - Aug 2024</div>
+                </div>
+
+                <div class="timeline-axis-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+
+                <div class="timeline-content">
+                    <div class="org-header">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1f/Manipal_University_Jaipur_logo.png" alt="Manipal" class="org-logo" onerror="this.style.display='none'" referrerpolicy="no-referrer">
+                        <a href="https://jaipur.manipal.edu/" target="_blank" class="timeline-org">Manipal University Jaipur</a>
+                    </div>
+                    <div class="timeline-meta">
+                        <span class="timeline-role">B.Tech in Information Technology</span>
+                        <span class="timeline-loc"><i class="fa-solid fa-location-dot"></i> Jaipur, India</span>
+                    </div>
+                    <div class="timeline-desc">
+                        I spent four great years here picking up a minor in Computational Intelligence. This is where I wrote my first neural networks, laid down my mathematical foundations, and completely fell down the AI rabbit hole.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 id="publications"><i class="fa-solid fa-book-open"></i> Publications</h2>
+
+        <div class="block">
+            <div class="block-header">
+                <h3>The Verifier Gap: Negative Scaling and Syntactic-Logical Divergence in Reasoning Distillation</h3>
+                <span class="badge">Preprint (Preparing for A* Conf)</span>
+            </div>
+            <a href="https://doi.org/10.5281/zenodo.19569263" target="_blank" class="btn-link">
+                <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.41l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.41zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+                Zenodo DOI: 10.5281/zenodo.19569263
+            </a>
+            <p>Language models are getting eerily good at generating step-by-step reasoning, but actually verifying if those steps are logically sound is a completely different story. In this paper, we explore a strange quirk: why models sometimes scale negatively when forced to separate syntactic text generation (sounding smart) from true logical verification (being right). We map out exactly where these reasoning structures begin to break down as you scale them up.</p>
+        </div>
+
+        <div class="block">
+            <div class="block-header">
+                <h3>Physics-Constrained Evolutionary AI for Robust Crop Yield Forecasting</h3>
+                <span class="badge">Submitted to Computers and Electronics in Agriculture</span>
+            </div>
+            <p>Predicting crop yields with AI usually fails when the climate shifts, because standard deep learning models just overfit to historical weather patterns. I wrote this paper to show that if you force the AI to respect actual biology - using evolutionary algorithms to pick physical drivers like soil clay and vapor pressure - you can fix this. We achieved predictive parity \((R^{2}\approx0.85)\) with massive CNN-LSTM ensembles while using 99% less data dimensionality. Basically, embedding physics beats brute-force data scaling.</p>
+        </div>
+
+        <div class="block">
+            <div class="block-header">
+                <h3>Advanced Crop Yield Prediction using ML/DL: Comprehensive Review</h3>
+                <span class="badge">TELKOMΝΙΚΑ, Vol 23(12)</span>
+            </div>
+            <a href="https://doi.org/10.12928/TELKOMΝΙΚΑ.v2312.26621" target="_blank" class="btn-link">
+                <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.41l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.41zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+                DOI: 10.12928/TELKOMΝΙΚΑ.v2312.26621
+            </a>
+            <p>Before building my own architectures for earth observation, I needed to understand everything that had been tried before. I read and systematically reviewed 80 papers spanning a decade (2014-2024). I mapped out where state-of-the-art algorithms (like Random Forests and LSTMs) succeed, assessed the remote sensing data everyone uses, and outlined the persistent evaluation challenges the community still faces.</p>
+        </div>
+
+        <h2 id="research"><i class="fa-solid fa-microscope"></i> Research Projects</h2>
+
+        <div class="block">
+            <div class="block-header">
+                <h3>The Illusion of Modularity: A Cross-Scale Benchmark of Sparse Feature Entanglement</h3>
+                <span class="badge">Ongoing Research</span>
+            </div>
+            <p>I am super curious about how features entangle inside LLMs. People like to think of neural networks as having independent "modules" for concepts, but my ongoing virtual ablation experiments on Gemma-2 show that trying to "unlearn" hazardous knowledge usually fails in the middle layers because the model just dynamically routes around the ablation. To measure this, I built a normalized Virtual Ablation Synergy (\(L_{2}\)) metric directly in the residual stream. Turns out, if we want safe AI, we have to target very specific late-layer bottlenecks.</p>
+        </div>
+
+        <h2 id="projects"><i class="fa-solid fa-code"></i> Pet Projects</h2>
+
+        <div class="pet-projects">
+
+            <div class="pet-card">
+                <h3>GPT-2 (124M) From Scratch</h3>
+                <div class="tags"><span>PyTorch</span><span>CUDA</span><span>Transformers</span></div>
+                <p>I firmly believe you don't really understand an architecture until you build it yourself. So, I coded up a 124M parameter GPT-2 entirely from scratch in PyTorch. I trained it on 10 billion tokens from the FineWeb dataset and optimized the hardware throughput by 42% via FlashAttention-2, BF16 mixed-precision, and gradient accumulation.</p>
+                <div style="margin-top: 15px;">
+                    <!-- <a href="https://github.com/AnandAyush11" target="_blank" class="btn-link"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> View on GitHub</a> -->
+                </div>
+            </div>
+
+            <div class="pet-card">
+                <h3>AskVideo AI Platform</h3>
+                <div class="tags"><span>Flask/React</span><span>RAG</span><span>Docker/GCP</span></div>
+                <p>I built a multimodal RAG application to essentially "chat" with YouTube videos. I wired up Llama 3.2 Vision, passed the audio through OpenAI Whisper, and stored everything in ChromaDB to provide timestamp-aligned contextual answers.</p>
+                <div style="margin-top: 15px;">
+                    <a href="https://youtu.be/VSbJpPWt9q4" target="_blank" class="btn-link">
+                        <svg viewBox="0 0 24 24"><path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg> View on YouTube
+                    </a>
+                </div>
+            </div>
+
+            <div class="pet-card">
+                <h3>FDA Pharmacovigilance Analyzer</h3>
+                <div class="tags"><span>RAPIDS</span><span>Isolation Forest</span><span>Streamlit</span></div>
+                <p>I wrote an anomaly-detection pipeline to hunt for hidden drug safety signals across 1.6 million FAERS medical reports. I rewrote the preprocessing to use RAPIDS and Dask, running it entirely on the GPU to speed things up by 10x.</p>
+                <p>
+                  NOTE: The link below might take a while to load due to cold start
+                </p>
+                <div style="margin-top: 15px;">
+                    <a href="https://faers-dashboard-service-172545954060.asia-south1.run.app" target="_blank" class="btn-link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg> Dashboard </a>
+                </div>
+            </div>
+
+            <div class="pet-card">
+                <h3>M5 Walmart Sales Forecasting</h3>
+                <div class="tags"><span>LightGBM</span><span>Time Series</span><span>GCP</span></div>
+                <p>Forecasted demand for over 30,000 products across 10 U.S. stores by engineering 70+ features to map complex seasonalities. I benchmarked LightGBM against SARIMA and Prophet, then deployed the interactive tracking dashboard directly to GCP.</p>
+                <p>
+                  NOTE: The link below might take a while to load due to cold start
+                </p>
+                <div style="margin-top: 15px;">
+                    <a href="https://m5-sales-dashboard-service-172545954060.asia-south1.run.app" target="_blank" class="btn-link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg> Dashboard </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ayush Anand.</p>
+    </footer>
+
+</body>
+</html>
